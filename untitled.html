@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kirim OTP WhatsApp</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    button {
+      background: green;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: darkgreen;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Kirim Kode OTP</h2>
+
+  <input type="text" id="nomor" placeholder="628xxxxxxxxxx">
+
+  <button onclick="kirimOTP()">
+    Kirim OTP ke WhatsApp
+  </button>
+</div>
+
+<script>
+function generateOTP() {
+  return Math.floor(100000 + Math.random() * 900000);
+}
+
+function kirimOTP() {
+  let nomor = document.getElementById('nomor').value;
+
+  if(nomor === '') {
+    alert('Masukkan nomor terlebih dahulu');
+    return;
+  }
+
+  let otp = generateOTP();
+
+  let pesan = `Kode verifikasi kamu adalah: ${otp}`;
+
+  let url = `https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`;
+
+  window.open(url, '_blank');
+}
+</script>
+
+</body>
+</html>
